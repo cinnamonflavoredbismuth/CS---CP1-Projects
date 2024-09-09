@@ -1,0 +1,20 @@
+def calculate_stuff(x, y):
+    z = x * y
+    return z
+
+def another_calculation(a, b, c):
+    temp = calculate_stuff(a, b)
+    result = temp * c
+    return result
+
+length = 5
+width = 3
+plane = calculate_stuff(length, width)
+print(f"The rectangles's size is: {plane}")
+
+length = 4
+width = 6
+height = 2
+cube = another_calculation(length, width, height)
+print(f"The cube's size is: {cube}")
+#My first reaction to this code was slight confusion, because it wasn't really clear what was being done or why the variables were named that way. I took another close look at the code, and at the math specifically. Finally, when I saw the math having 2 numbers for one, and 3 for 2, I realized that this code is likely to calculate area and volume. The shapes are probably just a plane and a cube.
