@@ -1,6 +1,6 @@
 #Cecily Strong Area Calculator
 again="Y"
-if again ="Y":
+while again == "Y":
     begin=int(input("press 1 for square, 2 for rectangle, 3 for triangle, 4 for circle, 5 for trapazoid"))
 
     if begin==1:
@@ -24,3 +24,5 @@ if again ="Y":
         product=((num1+num2)/2)*num3
     print("your answer is:",product)
     again=input("do you want to go again? Y/N")
+if again == "N":
+    print("Thank you for playing")

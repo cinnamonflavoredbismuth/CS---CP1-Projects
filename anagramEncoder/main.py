@@ -1,12 +1,13 @@
-input=input("type your name")
-name=[x for x in input]
 import random
-def scramble ():
-    random.shuffle(name)
-    name2=' '.join(name)
-    print(name2)
-scramble
-scramble
-scramble
-scramble
-scramble
+name=input("type your name")
+list(name)
+
+def scramble(name2):
+    random.shuffle(name2)
+    #name2=''.join(name)
+    print(''.join(name2))
+scramble(name)
+scramble(name)
+scramble(name)
+scramble(name)
+scramble(name)
