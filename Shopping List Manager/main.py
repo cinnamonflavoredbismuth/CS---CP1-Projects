@@ -13,13 +13,15 @@ while True:
     if action =="1":
         add=input("what would you like to add?")
         shoppinglist.append(add)
-        print(', '.join(shoppinglist))
+        print(shoppinglist)
+
 
  
     elif action =="2":
         remove=input("what would you like to remove?")
         shoppinglist.remove(remove)
-        print(', '.join(shoppinglist))
+        print(shoppinglist)
+        
 
     else:
         print("Have a nice day!")
