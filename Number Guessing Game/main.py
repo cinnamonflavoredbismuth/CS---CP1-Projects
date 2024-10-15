@@ -5,7 +5,7 @@ while play=='yes':
     number= random.randint(1,10)
     userNum=0
     while userNum!=number:
-        #these are the instructions
+        #thSese are the instructions
         userNum=int(input("I picked a number between 1 and 10, what is my number?"))
         if userNum>number:
             print("too high!")
