@@ -1,20 +1,14 @@
 #Cecily Strong SkillPractice: What is My Grade
-#percent=[float(input("what is your grade percentage for period 1?")),
-#         float(input("what is your grade percentage for period 2?")),
-#         float(input("what is your grade percentage for period 3?")),
-#         float(input("what is your grade percentage for period 6?")),
-#         float(input("what is your grade percentage for period 7?")),
-#         float(input("what is your grade percentage for period 8?")),]
 grades=[]
 def gradecheck():
     if percent>=93:
-        grade="you have an A!"
+        grade="you have an A"
     elif percent>=90:
-        grade="you have an A-!"
+        grade="you have an A-"
     elif percent>=87.1:
         grade="you have a B+"
     elif percent>=83:
-        grade="you have a B!"
+        grade="you have a B"
     elif percent>=80:
         grade="you have a B-"
     elif percent>=77.1:
@@ -31,13 +25,23 @@ def gradecheck():
         grade="you are failing"
     grades.append(grade)
 start='yes'
+
 classes=[]
-if start=='yes':  
+while start=='yes':  
     classname=input("which class is this for?")
     classes.append(classname)
-    percent=input("what is your percentage")
+   # print(classes)
+    percent=int(input("what is your percentage"))
     gradecheck()
+  #  print(grades)
     start=input("another class? yes/no")
+    if start==('yes'):
+        start='yes'
+    else:
+        start='no'
 else:
-    a>
-    print
+    a=0
+    while a<len(grades):
+        print(str(grades[a]), "in", str(classes[a]))
+        a+=1
+print("thank you")
