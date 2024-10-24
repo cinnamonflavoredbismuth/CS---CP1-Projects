@@ -43,12 +43,34 @@ def board():
     printboard(a1,a2,a3)
     printboard(b1,b2,b3)
     printboard(c1,c2,c3)
+board()
 def Xturn():
+    global a1
+    global a2
+    global a3
+    global b1
+    global b2
+    global b3
+    global c1
+    global c2
+    global c3
+    global coordinates
+    global coordinatesinput
+    global a1input
+    global a2input
+    global a3input
+    global b1input
+    global b2input
+    global b3input
+    global c1input
+    global c2input
+    global c3input
     print("which square would you like?")
     X=input(', '.join(coordinatesinput))
     print(X)
     if X=='top left' and a1==' ':
         a1='X'
+        coordinatesinput
     elif X=='top middle' and a2==' ':
         a2='X'
     elif X=='top right' and a3==' ':
@@ -70,12 +92,6 @@ def Xturn():
     print(X)
     print(coordinates)
     board()
-Xturn()
+def computerturn ():
 
-a1=' '
-print(a1)
-X=input('type top left')
-print(X)
-if X=='top left' and a1==' ':
-        a1='X'
-print(a1)
+Xturn()
