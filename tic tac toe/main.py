@@ -1,4 +1,5 @@
 #Cecily Strong ProficiencyTest: Rock, Paper, Scissors
+
 import random
 a1=' '
 a1input='top left'
@@ -45,10 +46,36 @@ def board():
 def Xturn():
     print("which square would you like?")
     X=input(', '.join(coordinatesinput))
-    def lazyinput(coordinput, coord):
-        if X==coordinput and coord== ' ':
-            coord='X'
-    lazyinput(coordinatesinput[1:],coordinates[1:])
-    print()
-
+    print(X)
+    if X=='top left' and a1==' ':
+        a1='X'
+    elif X=='top middle' and a2==' ':
+        a2='X'
+    elif X=='top right' and a3==' ':
+        a3='X'
+    elif X=='middle left' and b1==' ':
+        b1='X'
+    elif X=='middle' and b2==' ':
+        b2='X'
+    elif X=='middle right' and b3==' ':
+        b3='X'
+    elif X=='bottom left' and c1==' ':
+        c1='X'
+    elif X=='bottom middle' and c2==' ':
+        c2='X'
+    elif X=='bottom right' and c3==' ':
+        c3='X'
+    else:
+        print("coordinate not valid")
+    print(X)
+    print(coordinates)
+    board()
 Xturn()
+
+a1=' '
+print(a1)
+X=input('type top left')
+print(X)
+if X=='top left' and a1==' ':
+        a1='X'
+print(a1)
