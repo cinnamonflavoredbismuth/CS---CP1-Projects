@@ -1,20 +1,13 @@
 #Cecily Strong SkillPractice: Password Validator
-'''password=''
-def numsearch(inpassword):
-    numbers=("1234567890")
-    if 
-while not((any(password.isdigit())==True)and len(password)>=8 and any(password.isalnum())==False):
+passwordbad=True
+while passwordbad==True:
     password=input("type your password")
-    if any(password.isdigit())==False:
-        print('add a number')
-        continue
-    elif len(password)<8:
+    if (('0'or'1'or'2'or'3'or'4'or'5'or'6'or'7'or'8'or'9') not in password):
+        print('you have a number')
+    if len(password)<8:
         print('make it longer')
-        continue
-    elif any(password.isalnum())==True:
+    if not'!'or'@'or'$'or'%'or'^'or'&'or'*'in password:
         print("add a special character")
-        continue
     else:
-        break
-else:
-    print("you have created a strong password!")'''
+        print("you have created a strong password!")
+        passwordbad=False
