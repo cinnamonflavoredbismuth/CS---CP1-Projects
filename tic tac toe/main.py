@@ -2,22 +2,22 @@
 
 import random
 a1=' '
-a1input='top left'
 a2=' '
-a2input='top middle'
 a3=' '
-a3input='top right'
 b1=' '
-b1input='middle left'
 b2=' '
-b2input='middle'
 b3=' '
-b3input='middle right'
 c1=' '
-c1input='bottom left'
 c2=' '
-c2input='bottom middle'
 c3=' '
+a1input='top left'
+a2input='top middle'
+a3input='top right'
+b1input='middle left'
+b2input='middle'
+b3input='middle right'
+c1input='bottom left'
+c2input='bottom middle'
 c3input='right middle'
 winA=[a1,a2,a3]
 winB=[b1,b2,b3]
@@ -44,7 +44,6 @@ def board():
     printboard(a1,a2,a3)
     printboard(b1,b2,b3)
     printboard(c1,c2,c3)
-board()
 def Xturn():
     global a1
     global a2
@@ -68,6 +67,7 @@ def Xturn():
     global c3input
     print("which square would you like?")
     X=input(', '.join(coordinatesinput))
+    X.lower()
     print(X)
     if X=='top left' and a1==' ':
         a1='X'
@@ -98,6 +98,8 @@ def Xturn():
         coordinatesinput.remove('bottom right')
     else:
         print("coordinate not valid")
+        board()
+        Xturn()
     board()
 def Oturn():
     global a1
@@ -149,9 +151,60 @@ def Oturn():
         c3='O'
         coordinatesinput.remove('bottom right')
     board()
+def reset():
+    global a1
+    global a2
+    global a3
+    global b1
+    global b2
+    global b3
+    global c1
+    global c2
+    global c3
+    global coordinates
+    global coordinatesinput
+    a1=' '
+    a2=' '
+    a3=' '
+    b1=' '
+    b2=' '
+    b3=' '
+    c1=' '
+    c2=' '
+    c3=' '
+    coordinatesinput=[a1input,a2input,a3input,b1input,b2input,b3input,c1input,c2input,c3input]
+    coordinates=[a1,a2,a3,b1,b2,b3,c1,c2,c3]
+#"""
 while play==True:
-
-    while 
-    Xturn
-    print('')
-    Oturn()
+    reset()
+    print("Lets play Tic-Tac-Toe!")
+    board()
+    winorlose=False
+    while winorlose==False:
+        Xturn()
+        print('')
+        if all in winA=='X' or all in winB=='X' or all in winC=='X' or all in win1=='X' or all in win2=='X' or all in win3=='X' or all in winac1=='X' or all in winac2=='X':
+            print("You win!")
+            winorlose=True
+        elif (not a1==' ')and(not a2==' ')and(not a3==' ')and(not b1==' ')and(not b2==' ')and(not b3==' ')and(not c1==' ')and(not c2==' ')and(not c3==' '):
+            print('its a tie!')
+            winorlose=True
+        else:
+            Oturn()
+            print('')
+            if all in winA=='O' or all in winB=='O' or all in winC=='O' or all in win1=='O' or all in win2=='O' or all in win3=='O' or all in winac1=='O' or all in winac2=='O':
+                print('You lose')
+                winorlose=True
+            elif (not a1==' ')and(not a2==' ')and(not a3==' ')and(not b1==' ')and(not b2==' ')and(not b3==' ')and(not c1==' ')and(not c2==' ')and(not c3==' '):
+                print('its a tie!')
+                winorlose=True
+            else:
+                continue
+    else:
+        playinput=input("play again? y/n")
+        playinput.lower()
+        if playinput=='y':
+            play=True
+        else:
+            play=False
+#"""
