@@ -9,15 +9,22 @@ while passwordbad==True:
             print('add a number')
         if len(password)<8:
             print('make it longer')
-        if (not('!'or'@'or'$'or'%'or'^'or'&'or'*' or')'or'('or'#')in password):
+        if (not('@'or'^'or'$'or'%'or'^'or'&'or'*'or')'or'('or'#') in password):
             print("add a special character")
     else:
         print("you have created a strong password!")
         passwordbad=False
 '''
-password='c@t0'
+#"""
+password='ct*0aaaaaaaa'
 print("is there a special character?")
-if (not('@'or'^') in password):
-    print(False)
-else:
-    print(True)
+if (not('@'or'^'or'$'or'%'or'^'or'&'or'*'or')'or'('or'#') in password):
+    print("add a special character")
+#else:
+    
+#    print('yes special char')
+if len(password)<8:
+    print('make it longer')
+if (not ('0'or'1'or'2'or'3'or'4'or'5'or'6'or'7'or'8'or'9')in password):
+    print('add a number')
+#"""

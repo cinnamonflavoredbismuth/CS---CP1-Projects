@@ -1,7 +1,11 @@
-#TEST
-def is_between(num):
-     if num >= 10 and num < 20:
-          print(True)
-     else:
-          print(False)
-is_between(15)
+example=True
+while example==True:
+    print("hello")
+blue=1
+red=2
+if red==True:
+     print('red')
+elif blue==True:
+     print('true')
+else:
+     print('green')
