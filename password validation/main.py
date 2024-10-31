@@ -13,7 +13,7 @@ while passwordbad<3:
             passwordbad+=1
     else:
             print('make it longer')
-    if '!' in password or '@' in password or '^' in password or'$' in password or'%' in password or'^' in password or'&' in password or'*' in password or')' in password or'(' in password or'#' in password:
+    if '!' in password or '@' in password or '#' in password or '^' in password or'$' in password or'%' in password or'^' in password or'&' in password or'*' in password or')' in password or'(' in password or'#' in password:
             passwordbad+=1
     else:
             print("add a special character")
