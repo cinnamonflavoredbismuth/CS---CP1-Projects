@@ -1,30 +1,21 @@
 #Cecily Strong SkillPractice: Password Validator
-passwordbad=True
+passwordbad=0
 password=''
-'''
-while passwordbad==True:
+#'''
+while passwordbad<3:
+    passwordbad=0
     password=input("type your password")
-    if (not ('0'or'1'or'2'or'3'or'4'or'5'or'6'or'7'or'8'or'9')in password) or len(password)<8 or (not('!'or'@'or'$'or'%'or'^'or'&'or'*')in password):
-        if (not ('0'or'1'or'2'or'3'or'4'or'5'or'6'or'7'or'8'or'9')in password):
-            print('add a number')
-        if len(password)<8:
-            print('make it longer')
-        if (not('@'or'^'or'$'or'%'or'^'or'&'or'*'or')'or'('or'#') in password):
-            print("add a special character")
+    if '0' in password or'1' in password or'2' in password or'3' in password or'4' in password or'5' in password or'6' in password or'7' in password or'8' in password or'9' in password :
+            passwordbad+=1
     else:
-        print("you have created a strong password!")
-        passwordbad=False
-'''
-#"""
-password='ct*0aaaaaaaa'
-print("is there a special character?")
-if (not('@'or'^'or'$'or'%'or'^'or'&'or'*'or')'or'('or'#') in password):
-    print("add a special character")
-#else:
-    
-#    print('yes special char')
-if len(password)<8:
-    print('make it longer')
-if (not ('0'or'1'or'2'or'3'or'4'or'5'or'6'or'7'or'8'or'9')in password):
-    print('add a number')
-#"""
+            print('add a number')
+    if len(password)>=8:
+            passwordbad+=1
+    else:
+            print('make it longer')
+    if '!' in password or '@' in password or '^' in password or'$' in password or'%' in password or'^' in password or'&' in password or'*' in password or')' in password or'(' in password or'#' in password:
+            passwordbad+=1
+    else:
+            print("add a special character")
+
+print('password authorized')
