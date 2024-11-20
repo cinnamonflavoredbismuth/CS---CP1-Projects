@@ -1,6 +1,6 @@
 #Cecily Strong RAID: Simple Histogram
-numbers=input("type a string of 6 numbers")
-histogram=list(numbers)
+numbers=input("type a list of 6 numbers")
+histogram=numbers.split()
 print(histogram)
 i=0
 
