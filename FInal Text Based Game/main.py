@@ -1,6 +1,8 @@
 #Cecily Strong FINAL: Implementation
 import random
 
+#note to self: variables are camelCase while functions are snake_case
+
 #player stuff
 #done
 
@@ -12,8 +14,8 @@ inventory=[]
 #options for menus
 #done
 
-mainMenu=[0,'1. Naviation','2. Inventory','3. Stats']
-stats=[health, xp, speed, inventory]
+mainMenu=[0,'1. Naviation','2. Inventory','3. Stats','4. Room Options']
+stats={'health':health,'XP':xp,'Speed':speed}
 inventoryOptions=[0,'1.Equip','2.Eat','3.Drop','4.Back']
 fightOptions=[0,'1. Attack','2.Item','3. Run away']
 itemOptions=[0,'1.Pick up','2.Ignore']
@@ -106,14 +108,64 @@ room=0 #current room
 monster=0 #current monster in room
 item=0 #current item
 weapon=0 #current weapon
-moveNav=0 
-
-#rooms
+moveNav=0 #navigation choice
+itemSelect=0
+doWithItem=0
+menuChoice=0 #movement choice. Note: try to make all choice variables same variable
 room=1
-print('you are in the',rooms[room])
-print('type which number of room you want to go')
-moveNav=input(navigation[room])
-room=navigation[room][int(moveNav)]
-room=room.index(room)
-print('room=',room)
-print(rooms[room])
+#main menu
+def main_menu():
+    global mainMenu,rooms,room,navigation,moveNav,inventory,stats
+    print('you are in the',rooms[room])
+    menuChoice=int(input(mainMenu))
+    if menuChoice==1: #Navigation Options
+        print('type which number of room you want to go, press 0 to exit')
+        moveNav=int(input(navigation[room]))
+        if moveNav!=0 and moveNav<=len(navigation[room]):
+            print('you did not press 0')
+            room=navigation[room][moveNav]
+            room=rooms.index(room)
+            print(rooms[room])
+            main_menu()            
+        else:
+            print('Exit')
+            main_menu()
+    if menuChoice==2:#inventory
+        print(inventory)
+    if menuChoice==3:#Stats
+        print(stats)
+    if menuChoice==4:
+        print(roomItem[room])
+        print(monsters[room])
+#fight mechanics
+def fight_function():
+    print(monsters[room][2])
+#items in room mechanics
+#done
+def room_item():
+    global roomItem,room,itemSelect,doWithItem,itemOptions,inventory
+    print('press the number of the item you want to select, press 0 to exit')
+    itemSelect=int(input(roomItem[room]))
+    if itemSelect!=0:
+        print(roomItem[room][itemSelect])
+        doWithItem=int(input(itemOptions))
+        if doWithItem==1:
+            inventory.append(roomItem[room][itemSelect])
+            roomItem[room].pop(itemSelect)
+            main_menu()
+        else:
+            main_menu()
+    else:
+        main_menu()
+#new room function
+#done
+def new_room():
+    print('you are in the',rooms[room])
+    if len(monsters[room])>1:
+        fight_function()
+    else:
+        if len(roomItem[room])>1:
+            room_item()
+        else:
+            main_menu()
+new_room()
