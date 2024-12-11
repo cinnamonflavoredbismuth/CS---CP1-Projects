@@ -6,10 +6,12 @@ import random
 #player stuff
 #done
 
-health=0
+
 xp=0
-speed=0
-inventory=[]
+totalHealth=5
+health=totalHealth
+speed=1
+inventory=[0]
 
 #options for menus
 #done
@@ -107,21 +109,40 @@ navigation=[0,nav1,nav2,nav3,nav4,nav5,nav6,nav7,nav8,nav9,nav10,
 room=0 #current room
 monster=0 #current monster in room
 item=0 #current item
-weapon=0 #current weapon
+weapon=1 #current weapon
 moveNav=0 #navigation choice
-itemSelect=0
-doWithItem=0
-menuChoice=0 #movement choice. Note: try to make all choice variables same variable
+choice=0 #movement choice. Note: try to make all choice variables same variable
+monTotal=5
+monHealth=monTotal
 room=1
+fightChoose=0
+suceed=0
+whatDo=0
+weapons=['Baseball Bat','Knife']
+foods=['Hp recovery potion','Strawberries']
+inventory=[0,'Strawberries','Knife']
+#inventory
+def inventory_options():
+    global choice,inventory,whatDo
+    print('What item do you want to select?')
+    choice=int(input(inventory))
+    print(f"you selected the {inventory[choice]}! press which number you would like to do with it, and press 0 to exit")
+    whatDo=int(input(inventoryOptions))
+    if whatDo==1: #Equip
+        if inventory[choice] in weapons:
+            print('thats a weapon all right')
+        else:
+            print('thats not a weapon')
+inventory_options()
 #main menu
 def main_menu():
-    global mainMenu,rooms,room,navigation,moveNav,inventory,stats
+    global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice
     print('you are in the',rooms[room])
-    menuChoice=int(input(mainMenu))
-    if menuChoice==1: #Navigation Options
+    choice=int(input(mainMenu))
+    if choice==1: #Navigation Options
         print('type which number of room you want to go, press 0 to exit')
-        moveNav=int(input(navigation[room]))
-        if moveNav!=0 and moveNav<=len(navigation[room]):
+        choice=int(input(navigation[room]))
+        if choice!=0 and choice<=len(navigation[room]):
             print('you did not press 0')
             room=navigation[room][moveNav]
             room=rooms.index(room)
@@ -130,26 +151,61 @@ def main_menu():
         else:
             print('Exit')
             main_menu()
-    if menuChoice==2:#inventory
-        print(inventory)
-    if menuChoice==3:#Stats
+    if choice==2:#inventory
+        inventory_options()
+    if choice==3:#Stats
         print(stats)
-    if menuChoice==4:
+    if choice==4:
         print(roomItem[room])
         print(monsters[room])
 #fight mechanics
 def fight_function():
-    print(monsters[room][2])
+    #beginning stuff. declare monsters and allat
+    global monsters,room,health,xp,monTotal,monHealth,fightChoose,suceed
+    if room==(2 or 3)and len(monsters[room])>1:#beginning monster
+        monTotal=5
+    elif room==(4 or 10 or 16)and len(monsters[room])>1:#ghost
+        monTotal=16
+    elif room==(5 or 6)and len(monsters[room])>1:#Cook and Hangry
+        monTotal=7
+    elif room==(7 or 9 or 13)and len(monsters[room])>1:#soap, apple, and water
+        monTotal=13
+    elif room==(8 or 14)and len(monsters[room])>1:#electric fence
+        monTotal=12
+    elif room==(17)and len(monsters[room])>1:#Owner (mini boss)
+        monTotal=20
+    elif room==(18)and len(monsters[room])>1:#Final Boss
+        monTotal=30
+    else:
+        print('''There is no monster...
+              did you break the code?''')
+    monHealth=monTotal
+    print(f'You encounter the {monsters[room][-1]}!')
+    while monHealth>0:
+        #Beginning script. Health of both players, ect
+        print(f'Your health is: {health}/{totalHealth}')
+        print(f"The {monsters[room][-1]}'s health is: {monHealth}/{monTotal}")
+        print('what would you like to do?')
+        fightChoose=int(input(fightOptions))
+        if fightChoose==1:#attack
+            suceed=random.randint(weapon+xp,10)
+            print(suceed)
+            if suceed<xp:
+                print('Success! your attack landed!')
+                monHealth=-1
+            else:
+                print('You missed')
+        
 #items in room mechanics
 #done
 def room_item():
-    global roomItem,room,itemSelect,doWithItem,itemOptions,inventory
+    global roomItem,room,itemSelect,choice,itemOptions,inventory
     print('press the number of the item you want to select, press 0 to exit')
     itemSelect=int(input(roomItem[room]))
-    if itemSelect!=0:
+    if itemSelect>0:
         print(roomItem[room][itemSelect])
-        doWithItem=int(input(itemOptions))
-        if doWithItem==1:
+        choice=int(input(itemOptions))
+        if choice==1:
             inventory.append(roomItem[room][itemSelect])
             roomItem[room].pop(itemSelect)
             main_menu()
