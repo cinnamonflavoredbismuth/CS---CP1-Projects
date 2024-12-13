@@ -6,121 +6,73 @@ import random
 #player stuff
 #done
 
+def varSetup():
+    global inventory,mainMenu,stats,inventoryOptions,fightOptions,itemOptions,roomItem,monsters,navigation,room,monster,item,weapon,moveNav,choice,monHealth,fightChoose,suceed,whatDo,weapons,weaponStats,foods
+    global xp,speed,totalHealth,rooms,health
+    xp=0
+    totalHealth=5
+    health=totalHealth
+    speed=1
+    inventory=[0]
 
-xp=0
-totalHealth=5
-health=totalHealth
-speed=1
-inventory=[0]
+    #options for menus
+    #done
 
-#options for menus
-#done
-
-mainMenu=[0,'1. Naviation','2. Inventory','3. Stats','4. Room Options']
-stats={'health':health,'XP':xp,'Speed':speed}
-inventoryOptions=[0,'1.Equip','2.Eat','3.Drop','4.Back']
-fightOptions=[0,'1. Attack','2.Item','3. Run away']
-itemOptions=[0,'1.Pick up','2.Ignore']
-rooms = [0,'First room','Left room','Right room','Courtyard','Dining room',
+    mainMenu=[0,'1. Naviation','2. Inventory','3. Stats','4. Room Options']
+    stats={'health':health,'XP':xp,'Speed':speed}
+    inventoryOptions=[0,'1.Equip','2.Eat','3.Drop','4.Back']
+    fightOptions=[0,'1. Attack','2.Item','3. Run away']
+    itemOptions=[0,'1.Pick up','2.Ignore']
+    rooms = [0,'First room','Left room','Right room','Courtyard','Dining room',
          'kitchen','Bathroom','Fence','Orchard','Foyer','Secret passage',
          'Garden','Well','Fence2','Backdoor',
          'Hallway','Window','Master Bedroom']
-#options for all the rooms
-#key for me so I can remember what index every room is
-['1. First room','2. Left room','3. Right room','4. Courtyard','5.Dining room',
+    #options for all the rooms
+    #key for me so I can remember what index every room is
+    ['1. First room','2. Left room','3. Right room','4. Courtyard','5.Dining room',
          '6. kitchen','7. Bathroom','8. Fence','9. Orchard','10. Foyer','11. Secret passage',
          '12.Garden','13. Well','14. Fence2','15. Backdoor',
          '16. Hallway','17. Window','18. Master Bedroom']
 
-#items in rooms
-#done
+    #items in rooms
+    #done
+    roomItem=[0,[0,'Baseball Bat'],[0,'Hp recovery potion'],[0,'Hp recovery potion'],
+          [0,'Hp recovery potion'],[0,'Knife'],[0],[0],[0],[0],[0],[0,'Strawberries'],
+          [0,'Key'],[0],[0,'Rusty Bell'],[0],[0],[0],[0]]
 
-itemRoom1=[0,'Baseball Bat']
-itemRoom2=[0,'Hp recovery potion'] 
-itemRoom3=[0,'Hp recovery potion']
-itemRoom4=[0,'Hp recovery potion']
-itemRoom5=[0,'Knife']
-itemRoom6=[0]
-itemRoom7=[0]
-itemRoom8=[0]
-itemRoom9=[0]
-itemRoom10=[0]
-itemRoom11=[0,'Strawberries']
-itemRoom12=[0,'Key']
-itemRoom13=[0]
-itemRoom14=[0,'Rusty Bell']
-itemRoom15=[0]
-itemRoom16=[0]
-itemRoom17=[0]
-itemRoom18=[0]
-roomItem=[0,itemRoom1,itemRoom2,itemRoom3,itemRoom4,itemRoom5,itemRoom6,
-          itemRoom7,itemRoom8,itemRoom9,itemRoom10,itemRoom11,itemRoom12,
-          itemRoom13,itemRoom14,itemRoom15,itemRoom16,itemRoom17,itemRoom18]
+    #monsters in rooms 
+    #done
+    monsters=[0,[0],[0,'Beginning Monster'],[0,'Beginning Monster'],[0,'Ghost'],[0,'Hangry Person'],
+          [0,'Angry Cook'],[0,'Soap'],[0,'Electric Fence'],[0,'Apple'],[0,'Ghost'],
+          [0],[0],[0,'Water'],[0,'Electric Fence'],[0],[0,'Ghost'],[0,'Owner of Estate'],
+          [0,'Final Boss']]
 
-#monsters in rooms 
-#done
+    #navigation
+    #done
+    navigation=[0,[0,rooms[2],rooms[3]],[0,rooms[4],rooms[5],rooms[1]] ,[0,rooms[6],rooms[7],rooms[1]],
+            [0,rooms[8],rooms[9],rooms[2]],[0,rooms[10],rooms[11],rooms[2]],[0,rooms[11],rooms[3]],
+            [0,rooms[13],rooms[3]],[0,rooms[4],rooms[15]],[0,rooms[15],rooms[4]],
+            [0,rooms[15],rooms[16],rooms[5]],[0,rooms[18],rooms[5],rooms[6],rooms[12],rooms[16]],
+            [0,rooms[11],rooms[13]],[0,rooms[12],rooms[14],rooms[7]],[0,rooms[17],rooms[13]],
+            [0,rooms[8],rooms[9],rooms[10],rooms[16]],[0,rooms[15],rooms[10],rooms[11],rooms[18]],
+            [0,rooms[18],rooms[14]],[0,rooms[16],rooms[11],rooms[17]]]
 
-mon1=[0]
-mon2=[0,'Beginning Monster'] 
-mon3=[0,'Beginning Monster']
-mon4=[0,'Ghost']
-mon5=[0,'Hangry Person']
-mon6=[0,'Angry Cook']
-mon7=[0,'Soap']
-mon8=[0,'Electric Fence']
-mon9=[0,'Apple']
-mon10=[0,'Ghost']
-mon11=[0]
-mon12=[0]
-mon13=[0,'Water']
-mon14=[0,'Electric Fence']
-mon15=[0]
-mon16=[0,'Ghost']
-mon17=[0,'Owner of Estate']
-mon18=[0,'Final Boss']
-monsters=[0,mon1,mon2,mon3,mon4,mon5,mon6,mon7,mon8,mon9,mon10,
-          mon11,mon12,mon13,mon14,mon15,mon16,mon17,mon18]
-
-#navigation
-#done
-
-nav1=[0,rooms[2],rooms[3]]
-nav2=[0,rooms[4],rooms[5],rooms[1]] 
-nav3=[0,rooms[6],rooms[7],rooms[1]]
-nav4=[0,rooms[8],rooms[9],rooms[2]]
-nav5=[0,rooms[10],rooms[11],rooms[2]]
-nav6=[0,rooms[11],rooms[3]]
-nav7=[0,rooms[13],rooms[3]]
-nav8=[0,rooms[4],rooms[15]]
-nav9=[0,rooms[15],rooms[4]]
-nav10=[0,rooms[15],rooms[16],rooms[5]]
-nav11=[0,rooms[18],rooms[5],rooms[6],rooms[12],rooms[16]]
-nav12=[0,rooms[11],rooms[13]]
-nav13=[0,rooms[12],rooms[14],rooms[7]]
-nav14=[0,rooms[17],rooms[13]]
-nav15=[0,rooms[8],rooms[9],rooms[10],rooms[16]]
-nav16=[0,rooms[15],rooms[10],rooms[11],rooms[18]]
-nav17=[0,rooms[18],rooms[14]]
-nav18=[0,rooms[16],rooms[11],rooms[17]]
-navigation=[0,nav1,nav2,nav3,nav4,nav5,nav6,nav7,nav8,nav9,nav10,
-            nav11,nav12,nav13,nav14,nav15,nav16,nav17,nav18]
-
-#variable setup
-room=0 #current room
-monster=0 #current monster in room
-item=0 #current item
-weapon=1 #current weapon
-moveNav=0 #navigation choice
-choice=0 #movement choice. Note: try to make all choice variables same variable
-monTotal=5
-monHealth=monTotal
-room=2
-fightChoose=0
-suceed=0
-whatDo=0
-weapons=['Baseball Bat','Knife']
-weaponStats=[3,5]
-foods=['Hp recovery potion','Strawberries']
+    #variable setup
+    room=0 #current room
+    monster=0 #current monster in room
+    item=0 #current item
+    weapon=1 #current weapon
+    moveNav=0 #navigation choice
+    choice=0 #movement choice. Note: try to make all choice variables same variable
+    monTotal=5
+    monHealth=monTotal
+    room=1
+    fightChoose=0
+    suceed=0
+    whatDo=0
+    weapons=['Baseball Bat','Knife']
+    weaponStats=[2,3]
+    foods=['Hp recovery potion','Strawberries']
 #inventory
 def inventory_options():
     global choice,inventory,whatDo,health,totalHealth,weapon,item
@@ -150,13 +102,11 @@ def inventory_options():
         elif whatDo==0:
             break
         else:
-            print('that is not a valid option')
-        
+            print('that is not a valid option')        
 #main menu
 def main_menu():
-    global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice
+    global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice,exit
     exit=False
-
     print('you are in the',rooms[room])
     choice=int(input(mainMenu))
     if choice==1: #Navigation Options
@@ -186,9 +136,10 @@ def main_menu():
 #fight mechanics
 def fight_function():
     #beginning stuff. declare monsters and allat
-    global monsters,room,health,xp,monTotal,monHealth,fightChoose,suceed,speed,choice
+    global monsters,room,health,xp,monTotal,monHealth,fightChoose,suceed,speed,choice,monWeapon,monsterDrop
     if room==(2 or 3)and len(monsters[room])>1:#beginning monster
         monTotal=5
+        monWeapon=1
     elif room==(4 or 10 or 16)and len(monsters[room])>1:#ghost 
             monTotal=16
     elif room==(5 or 6)and len(monsters[room])>1:#Cook and Hangry
@@ -206,7 +157,7 @@ def fight_function():
               did you break the code?''')
     monHealth=monTotal
     print(f'You encounter the {monsters[room][-1]}!')
-    while monHealth>0 and health>0:
+    while monHealth>0:
         #Beginning script. Health of both players, ect
         if 'Rusty Bell' in inventory and room==(4 or 10 or 16)and len(monsters[room])>1:
             print('You scared the ghost away! would you like to fight it anyway?')
@@ -222,11 +173,11 @@ def fight_function():
         fightChoose=int(input(fightOptions))
         #Player's Turn
         if fightChoose==1:#attack
-            suceed=random.randint(weapon+xp,14)
+            suceed=random.randint(xp,14)
             print(suceed)
             if suceed<xp:
                 print('Success! your attack landed!')
-                monHealth=-1
+                monHealth=-weapon
             else:
                 print('You missed')
         if fightChoose==2:#Item
@@ -240,6 +191,21 @@ def fight_function():
                 break
             else:
                 print("You couldn't run away")
+        suceed=random.randint(speed,14)
+        print(suceed)
+        if suceed<xp:
+            print('The monster hit you!')
+            health-=monWeapon
+        else:
+            print("The monster missed") 
+    else:
+        monsters[room].pop(1)
+        print('You win!')
+        monsterDrop=random.randint(0,10)
+        if monsterDrop==1:
+            roomItem[room].append('Rusty Bell')
+        if monsterDrop==2:
+            roomItem[room].append('a paper that says 1324')
         
 #items in room mechanics
 #done
@@ -270,4 +236,12 @@ def new_room():
             room_item()
         else:
             main_menu()
-new_room()
+varSetup()
+while health>0:
+    new_room()
+else:
+    dead=int(input("You died! would you like to continue? 1. Yes 2. No"))
+    if dead==1:
+        varSetup()
+    else:
+        print('thanks for playing')
