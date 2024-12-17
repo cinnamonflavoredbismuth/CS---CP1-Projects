@@ -165,6 +165,7 @@ def main_menu():
             main_menu()
     elif choice==2:#inventory
         inventory_options()
+        main_menu()
     elif choice==3:#Stats
         print(stats)
         main_menu()
