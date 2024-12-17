@@ -87,11 +87,17 @@ def inventory_options():
     while exit!=True:
         print('What item do you want to select?')
         list_print(inventory)
-        choice=int(input())
+        try:
+            choice=int(input())
+        except:
+            print("You didn't type a number...")
         if choice!=0:
             print(f"you selected the {inventory[choice]}! press which number you would like to do with it")
             list_print(inventoryOptions)
-            whatDo=int(input())
+            try:
+                whatDo=int(input())
+            except:
+                print("You didn't type a number...")
             if whatDo==1: #Equip
                 if inventory[choice] in weapons:
                     weapon=weaponStats[weapons.index(inventory[choice])]
@@ -121,17 +127,27 @@ def main_menu():
     exit=False
     print('you are in the',rooms[room])
     list_print(mainMenu)
-    choice=int(input())
+    try:
+        choice=int(input())
+    except:
+        print("You didn't type a number...")
     if choice==1: #Navigation Options
         oldRoom=room
         print('type which number of room you want to go')
         list_print(navigation[room])
-        choice=int(input())
+        try:
+
+            choice=int(input())
+        except:
+            print("You didn't type a number...")
         if choice!=0 and choice<=len(navigation[room]):
             room=navigation[room][choice]
             room=rooms.index(room)
             if room==11:
-                number=int(input('what is the password?'))
+                try:
+                    number=int(input('what is the password?'))
+                except:
+                    print("You didn't type a number...")
                 if number==1324 or 'a paper that says 1324' in inventory:
                     pass
                 else:
@@ -154,17 +170,23 @@ def main_menu():
     elif choice==3:#Stats
         print(stats)
         main_menu()
-    elif choice==4:
+    elif choice==4:#Room options
         print('What would you like to do?')
         list_print(itemsOrMonsters)
-        choice=int(input())
+        try:
+            choice=int(input())
+        except:
+            print("You didn't type a number...")
         if choice==1:
             print("Items:")
-            if roomItem[room]!=0:
+            if len(roomItem[room])!=1:
                 list_print(roomItem[room])
                 print("Do you want to interact with this item?")
                 print(yesNo)
-                choice=int(input())
+                try:
+                    choice=int(input())
+                except:
+                    print("You didn't type a number...")
                 if choice==1:
                     room_item()
                     main_menu()
@@ -174,11 +196,14 @@ def main_menu():
                 print('No Items')
         elif choice==2:
             print('Monsters:')
-            if monsters[room]!=0:
+            if len(monsters[room])!=1:
                 list_print(monsters[room])
                 print("Do you want to fight this monster?")
                 print(yesNo)
-                choice=int(input())
+                try:
+                    choice=int(input())
+                except:
+                    print("You didn't type a number...")
                 if choice==1:
                     fight_function()
                     main_menu()
@@ -197,21 +222,27 @@ def fight_function():
     global monsters,room,health,xp,monTotal,monHealth,fightChoose,suceed,speed,choice,monWeapon,monsterDrop
     global totalHealth,escape
     escape=False
-    if room==(2 or 3)and len(monsters[room])>1:#beginning monster
+    if room==2 or room==3 and len(monsters[room])>1:#beginning monster
         monTotal=5
         monWeapon=1
-    elif room==(4 or 10 or 16)and len(monsters[room])>1:#ghost 
-            monTotal=16
-    elif room==(5 or 6)and len(monsters[room])>1:#Cook and Hangry
+    elif room==4 or room==10 or room==16 and len(monsters[room])>1:#ghost 
+        monTotal=16
+        monWeapon=1
+    elif room==5 or room==6 and len(monsters[room])>1:#Cook and Hangry
         monTotal=7
-    elif room==(7 or 9 or 13)and len(monsters[room])>1:#soap, apple, and water
+        monWeapon=1
+    elif room==7 or room==9 or room==13 and len(monsters[room])>1:#soap, apple, and water
         monTotal=13
-    elif room==(8 or 14)and len(monsters[room])>1:#electric fence
+        monWeapon=1
+    elif room==8 or room==14 and len(monsters[room])>1:#electric fence
         monTotal=12
+        monWeapon=1
     elif room==(17)and len(monsters[room])>1:#Owner (mini boss)
         monTotal=20
+        monWeapon=1
     elif room==(18)and len(monsters[room])>1:#Final Boss
         monTotal=30
+        monWeapon=1
     else:
         print('''There is no monster...
               did you break the code?''')
@@ -222,7 +253,10 @@ def fight_function():
         if 'Rusty Bell' in inventory and room==(4 or 10 or 16)and len(monsters[room])>1:
             print('You scared the ghost away! would you like to fight it anyway?')
             list_print(yesNo)
-            choice=int(input())
+            try:
+                choice=int(input())
+            except:
+                print("You didn't type a number...")
             if choice==1:
                 pass
             else:
@@ -231,7 +265,10 @@ def fight_function():
         print(f"The {monsters[room][-1]}'s health is: {monHealth}/{monTotal}")
         print('what would you like to do?')
         list_print(fightOptions)
-        fightChoose=int(input())
+        try:
+            fightChoose=int(input())
+        except:
+            print("You didn't type a number...")
         #Player's Turn
         playerTurn=True
         while playerTurn==True:
@@ -293,11 +330,17 @@ def room_item():
     global roomItem,room,itemSelect,choice,itemOptions,inventory
     print('press the number of the item you want to select')
     list_print(roomItem[room])
-    itemSelect=int(input())
+    try:
+        itemSelect=int(input())
+    except:
+        print("You didn't type a number...")
     if itemSelect>0:
         print(roomItem[room][itemSelect])
         list_print(itemOptions)
-        choice=int(input())
+        try:
+            choice=int(input())
+        except:
+            print("You didn't type a number...")
         if choice==1:
             inventory.append(roomItem[room][itemSelect])
             roomItem[room].pop(itemSelect)
@@ -328,11 +371,15 @@ def in_the_beninging():
     print('you are stuck in a haunted house! You have to escape')
     new_room()
     while health>0:
-        pass
+        if health<1:
+            break
     else:
         print("You died! would you like to continue?")
         list_print(yesNo)
-        dead=int(input())
+        try:
+            dead=int(input())
+        except:
+            print("You didn't type a number...")
         if dead==1:
             in_the_beninging()
         else:
