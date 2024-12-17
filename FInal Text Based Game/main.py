@@ -284,7 +284,9 @@ def fight_function():
             roomItem[room].append('Key')
         xp+=1
         totalHealth+=1
-        health=totalHealth       
+        health=totalHealth
+        if room==30:
+            print('you win!')       
 #items in room mechanics
 #done
 def room_item():
