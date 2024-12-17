@@ -8,7 +8,7 @@ import random
 
 def varSetup():
     global inventory,mainMenu,stats,inventoryOptions,fightOptions,itemOptions,roomItem,monsters,navigation,room,monster,item,weapon,moveNav,choice,monHealth,fightChoose,suceed,whatDo,weapons,weaponStats,foods
-    global xp,speed,totalHealth,rooms,health
+    global xp,speed,totalHealth,rooms,health,yesNo,itemsOrMonsters
     xp=0
     totalHealth=5
     health=totalHealth
@@ -18,14 +18,16 @@ def varSetup():
     #options for menus
     #done
 
-    mainMenu=['','Naviation','Inventory','Stats','Room Options']
+    mainMenu=['Menu','Naviation','Inventory','Stats','Room Options']
     stats={'health':health,'XP':xp,'Speed':speed}
-    inventoryOptions=['Exit','Equip','Eat','Drop','Back']
+    inventoryOptions=['Menu','Equip','Eat','Drop','Back']
     fightOptions=[0,'Attack','Item','Run away']
-    itemOptions=[0,'Pick up','Ignore']
+    itemOptions=['Menu','Pick up','Ignore']
+    itemsOrMonsters=['Menu','Items in room','Monsters in room']
+    yesNo=['Menu','Yes','No']
     rooms = [0,'First room','Left room','Right room','Courtyard','Dining room',
          'kitchen','Bathroom','Fence','Orchard','Foyer','Secret passage',
-         'Garden','Well','Fence2','Backdoor',
+         'Garden','Well','Fence','Backdoor',
          'Hallway','Window','Master Bedroom']
     #options for all the rooms
     #key for me so I can remember what index every room is
@@ -36,26 +38,26 @@ def varSetup():
 
     #items in rooms
     #done
-    roomItem=[0,[0,'Baseball Bat'],[0,'Hp recovery potion'],[0,'Hp recovery potion'],
-          [0,'Hp recovery potion'],[0,'Knife'],[0],[0],[0],[0],[0],[0,'Strawberries'],
-          [0,'Key'],[0],[0,'Rusty Bell'],[0],[0],[0],[0]]
+    roomItem=[0,['Menu','Baseball Bat'],['Menu','Hp recovery potion'],['Menu','Hp recovery potion'],
+          ['Menu','Hp recovery potion'],['Menu','Knife'],[0],[0],[0],[0],[0],['Menu','Strawberries','Key'],
+          ['Menu','Key'],[0],['Menu','Rusty Bell'],[0],[0],[0],[0]]
 
     #monsters in rooms 
     #done
     monsters=[0,[0],[0,'Beginning Monster'],[0,'Beginning Monster'],[0,'Ghost'],[0,'Hangry Person'],
           [0,'Angry Cook'],[0,'Soap'],[0,'Electric Fence'],[0,'Apple'],[0,'Ghost'],
-          [0],[0],[0,'Water'],[0,'Electric Fence'],[0],[0,'Ghost'],[0,'Owner of Estate'],
+          [0],[0],[0,'Water'],[0,'Electric Fence'],[0],[0,'Ghost'],[0],
           [0,'Final Boss']]
 
     #navigation
     #done
-    navigation=[0,[0,rooms[2],rooms[3]],[0,rooms[4],rooms[5],rooms[1]] ,[0,rooms[6],rooms[7],rooms[1]],
-            [0,rooms[8],rooms[9],rooms[2]],[0,rooms[10],rooms[11],rooms[2]],[0,rooms[11],rooms[3]],
-            [0,rooms[13],rooms[3]],[0,rooms[4],rooms[15]],[0,rooms[15],rooms[4]],
-            [0,rooms[15],rooms[16],rooms[5]],[0,rooms[18],rooms[5],rooms[6],rooms[12],rooms[16]],
-            [0,rooms[11],rooms[13]],[0,rooms[12],rooms[14],rooms[7]],[0,rooms[17],rooms[13]],
-            [0,rooms[8],rooms[9],rooms[10],rooms[16]],[0,rooms[15],rooms[10],rooms[11],rooms[18]],
-            [0,rooms[18],rooms[14]],[0,rooms[16],rooms[11],rooms[17]]]
+    navigation=[0,['Menu',rooms[2],rooms[3]],['Menu',rooms[4],rooms[5],rooms[1]] ,['Menu',rooms[6],rooms[7],rooms[1]],
+            ['Menu',rooms[8],rooms[9],rooms[2]],['Menu',rooms[10],rooms[11],rooms[2]],['Menu',rooms[11],rooms[3]],
+            ['Menu',rooms[13],rooms[3]],['Menu',rooms[4],rooms[15]],['Menu',rooms[15],rooms[4]],
+            ['Menu',rooms[15],rooms[16],rooms[5]],['Menu',rooms[18],rooms[5],rooms[6],rooms[12],rooms[16]],
+            ['Menu',rooms[11],rooms[13]],['Menu',rooms[12],rooms[14],rooms[7]],['Menu',rooms[17],rooms[13]],
+            ['Menu',rooms[8],rooms[9],rooms[10],rooms[16]],['Menu',rooms[15],rooms[10],rooms[11],rooms[18]],
+            ['Menu',rooms[18],rooms[14]],['Menu',rooms[16],rooms[11],rooms[17]]]
 
     #variable setup
     room=0 #current room
@@ -66,7 +68,7 @@ def varSetup():
     choice=0 #movement choice. Note: try to make all choice variables same variable
     monTotal=5
     monHealth=monTotal
-    room=1
+    room=17
     fightChoose=0
     suceed=0
     whatDo=0
@@ -83,42 +85,46 @@ def inventory_options():
     global choice,inventory,whatDo,health,totalHealth,weapon,item
     exit=False
     while exit!=True:
-        print('What item do you want to select? Press 0 to exit')
+        print('What item do you want to select?')
         list_print(inventory)
         choice=int(input())
-        print(f"you selected the {inventory[choice]}! press which number you would like to do with it, and press 0 to exit")
-        list_print(inventoryOptions)
-        whatDo=int(input())
-        if whatDo==1: #Equip
-            if inventory[choice] in weapons:
-                weapon=weaponStats[weapons.index(inventory[choice])]
-            else:
-                print('thats not a weapon')
-        elif whatDo==2:#Eat
-            if inventory[choice] in foods:
-                print('yummy')
-                health=totalHealth
+        if choice!=0:
+            print(f"you selected the {inventory[choice]}! press which number you would like to do with it")
+            list_print(inventoryOptions)
+            whatDo=int(input())
+            if whatDo==1: #Equip
+                if inventory[choice] in weapons:
+                    weapon=weaponStats[weapons.index(inventory[choice])]
+                else:
+                    print('thats not a weapon')
+            elif whatDo==2:#Eat
+                if inventory[choice] in foods:
+                    print('yummy')
+                    health=totalHealth
+                    inventory.pop(choice)
+                else:
+                    print("you can't eat that...")
+            elif whatDo==3:#Drop
+                roomItem[room].append(inventory[choice])
                 inventory.pop(choice)
+            elif whatDo==4:
+                pass
+            elif whatDo==0:
+                break
             else:
-                print("you can't eat that...")
-        elif whatDo==3:#Drop
-            roomItem[room].append(inventory[choice])
-            inventory.pop(choice)
-        elif whatDo==4:
-            pass
-        elif whatDo==0:
-            break
+                print('that is not a valid option')    
         else:
-            print('that is not a valid option')        
+            main_menu()   
 #main menu
 def main_menu():
-    global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice,exit
+    global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice,exit,oldRoom
     exit=False
     print('you are in the',rooms[room])
     list_print(mainMenu)
     choice=int(input())
     if choice==1: #Navigation Options
-        print('type which number of room you want to go, press 0 to exit')
+        oldRoom=room
+        print('type which number of room you want to go')
         list_print(navigation[room])
         choice=int(input())
         if choice!=0 and choice<=len(navigation[room]):
@@ -126,27 +132,71 @@ def main_menu():
             room=rooms.index(room)
             if room==11:
                 number=int(input('what is the password?'))
-                if number==1324:
+                if number==1324 or 'a paper that says 1324' in inventory:
                     pass
                 else:
                     print('Wrong password')
+                    room=oldRoom
+                    main_menu()
+            if room==18:
+                if 'Key'in inventory:
+                    pass
+                else:
+                    print("It's locked...")
+                    room=oldRoom
                     main_menu()
             new_room()            
         else:
             print('Exit')
             main_menu()
-    if choice==2:#inventory
+    elif choice==2:#inventory
         inventory_options()
-    if choice==3:#Stats
+    elif choice==3:#Stats
         print(stats)
-    if choice==4:
-        list_print(roomItem[room])
-        list_print(monsters[room])
+        main_menu()
+    elif choice==4:
+        print('What would you like to do?')
+        list_print(itemsOrMonsters)
+        choice=int(input())
+        if choice==1:
+            print("Items:")
+            if roomItem[room]!=0:
+                list_print(roomItem[room])
+                print("Do you want to interact with this item?")
+                print(yesNo)
+                choice=int(input())
+                if choice==1:
+                    room_item()
+                    main_menu()
+                else:
+                    main_menu()
+            else:
+                print('No Items')
+        elif choice==2:
+            print('Monsters:')
+            if monsters[room]!=0:
+                list_print(monsters[room])
+                print("Do you want to fight this monster?")
+                print(yesNo)
+                choice=int(input())
+                if choice==1:
+                    fight_function()
+                    main_menu()
+                else:
+                    main_menu()
+            else:
+                print('No monsters')
+        else:
+            main_menu()
+    else:
+        print("Why... would you do that?")
+        main_menu()
 #fight mechanics
 def fight_function():
     #beginning stuff. declare monsters and allat
     global monsters,room,health,xp,monTotal,monHealth,fightChoose,suceed,speed,choice,monWeapon,monsterDrop
-    global totalHealth
+    global totalHealth,escape
+    escape=False
     if room==(2 or 3)and len(monsters[room])>1:#beginning monster
         monTotal=5
         monWeapon=1
@@ -171,8 +221,8 @@ def fight_function():
         #Beginning script. Health of both players, ect
         if 'Rusty Bell' in inventory and room==(4 or 10 or 16)and len(monsters[room])>1:
             print('You scared the ghost away! would you like to fight it anyway?')
-            choice=int(input(""""1. Yes
-                             2. No"""))
+            list_print(yesNo)
+            choice=int(input())
             if choice==1:
                 pass
             else:
@@ -186,38 +236,42 @@ def fight_function():
         playerTurn=True
         while playerTurn==True:
             if fightChoose==1:#attack
-                suceed=random.randint(xp,14)
-                print(suceed)
-                if suceed<xp:
+                suceed=random.randint(0,14)
+                #print(suceed)
+                if suceed<=xp:
                     print('Success! your attack landed!')
                     monHealth=-weapon
                 else:
                     print('You missed')
+            
             elif fightChoose==2:#Item
                 inventory_options()
-            elif fightChoose==3:
-                suceed=random.randint(speed,14)
-                print(suceed)
-                if suceed<xp:
+            elif fightChoose==3:#run away
+                suceed=random.randint(0,14)
+                #print(suceed)
+                if suceed<=speed:
                     print('You successfully escaped')
                     speed+=1
-                    break
                     escape=True
+                    break
+                    
                 else:
                     print("You couldn't run away")
             else:
                 print("invalid choice")
+            input()
+            playerTurn=False
         #monsters turn
-        if escape==True;
+        if escape==True:
             break
         else:
-        suceed=random.randint(speed,14)
-        print(suceed)
-        if suceed<xp:
-            print('The monster hit you!')
-            health-=monWeapon
-        else:
-            print("The monster missed") 
+            suceed=random.randint(0,14)
+            #print(suceed)
+            if suceed<5:
+                print('The monster hit you!')
+                health-=monWeapon
+            else:
+                print("The monster missed") 
     else:
         monsters[room].pop(1)
         print('You win!')
@@ -226,15 +280,16 @@ def fight_function():
             roomItem[room].append('Rusty Bell')
         if monsterDrop==2:
             roomItem[room].append('a paper that says 1324')
+        if monsterDrop==3:
+            roomItem[room].append('Key')
         xp+=1
         totalHealth+=1
-        health=totalHealth
-        
+        health=totalHealth       
 #items in room mechanics
 #done
 def room_item():
     global roomItem,room,itemSelect,choice,itemOptions,inventory
-    print('press the number of the item you want to select, press 0 to exit')
+    print('press the number of the item you want to select')
     list_print(roomItem[room])
     itemSelect=int(input())
     if itemSelect>0:
@@ -256,19 +311,28 @@ def new_room():
     print('you are in the',rooms[room])
     if len(monsters[room])>1:
         fight_function()
+        if len(roomItem[room])>1:
+            room_item()
+        else:
+            main_menu()
     else:
         if len(roomItem[room])>1:
             room_item()
         else:
             main_menu()
-varSetup()
-while health>0:
+#Reset function
+def in_the_beninging():
     varSetup()
     print('you are stuck in a haunted house! You have to escape')
     new_room()
-else:
-    dead=int(input("You died! would you like to continue? 1. Yes 2. No"))
-    if dead==1:
-        varSetup()
+    while health>0:
+        pass
     else:
-        print('thanks for playing')
+        print("You died! would you like to continue?")
+        list_print(yesNo)
+        dead=int(input())
+        if dead==1:
+            in_the_beninging()
+        else:
+            print('thanks for playing')
+in_the_beninging()
