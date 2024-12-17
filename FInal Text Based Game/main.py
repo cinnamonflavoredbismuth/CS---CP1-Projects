@@ -118,9 +118,7 @@ def inventory_options():
             elif whatDo==0:
                 break
             else:
-                print('that is not a valid option')    
-        else:
-            main_menu()   
+                print('that is not a valid option')      
 #main menu
 def main_menu():
     global mainMenu,rooms,room,navigation,moveNav,inventory,stats,choice,exit,oldRoom
@@ -302,13 +300,14 @@ def fight_function():
         if escape==True:
             break
         else:
-            suceed=random.randint(0,14)
+            if health>0:
+                suceed=random.randint(0,14)
             #print(suceed)
-            if suceed<5:
-                print('The monster hit you!')
-                health-=monWeapon
-            else:
-                print("The monster missed") 
+                if suceed<5:
+                    print('The monster hit you!')
+                    health-=monWeapon
+                else:
+                    print("The monster missed") 
     else:
         monsters[room].pop(1)
         print('You win!')
