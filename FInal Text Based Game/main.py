@@ -373,15 +373,14 @@ def in_the_beninging():
     while health>0:
         if health<1:
             break
+    print("You died! would you like to continue?")
+    list_print(yesNo)
+    try:
+        dead=int(input())
+    except:
+        print("You didn't type a number...")
+    if dead==1:
+        in_the_beninging()
     else:
-        print("You died! would you like to continue?")
-        list_print(yesNo)
-        try:
-            dead=int(input())
-        except:
-            print("You didn't type a number...")
-        if dead==1:
-            in_the_beninging()
-        else:
-            print('thanks for playing')
+        print('thanks for playing')
 in_the_beninging()
