@@ -68,7 +68,7 @@ def varSetup():
     choice=0 #movement choice. Note: try to make all choice variables same variable
     monTotal=5
     monHealth=monTotal
-    room=17
+    room=1
     fightChoose=0
     suceed=0
     whatDo=0
